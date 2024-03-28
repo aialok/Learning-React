@@ -1,43 +1,41 @@
-import { useState } from "react"
+import React, { useState } from "react";
 
 export default function App() {
-
-  const [color, setColor] = useState('olive')
-
-  const colorChange = (e) => {
-
-    setColor((prev)=>prev=e.target.innerText.toLowerCase())
-    console.log(e.target.innerText)
-   
-
-  }
-
-  
-  document.body.style.backgroundColor = color;
-  const colorName= ["Red","Green","Blue","Orange","Yellow","Purple","Pink","Brown", "Gold"]
-  
+  const [heading, setHeading] = useState(123);
+  const randomValue = () => {
+    setHeading(Math.floor(Math.random() * 100));
+  };
 
   return (
-    <>
-    
-      <div className="flex justify-around items-center  bg-white p-4 ">
-        
-{/* 
-        <button  className="border-2 border-black px-4 py-2 hover:bg-slate-200 hover:text-black rounded-md text-xl"  onClick={colorChange}>Red</button>
-        <button  className="border-2 border-black px-4 py-2 hover:bg-slate-200 hover:text-black rounded-md text-xl"  onClick={colorChange}>Green</button>
-        <button  className="border-2 border-black px-4 py-2 hover:bg-slate-200 hover:text-black rounded-md text-xl"  onClick={colorChange}>Blue</button>
-        <button  className="border-2 border-black px-4 py-2 hover:bg-slate-200 hover:text-black rounded-md text-xl"  onClick={colorChange}>Orange</button>
-        <button  className="border-2 border-black px-4 py-2 hover:bg-slate-200 hover:text-black rounded-md text-xl"  onClick={colorChange}>Yellow</button>
-        <button  className="border-2 border-black px-4 py-2 hover:bg-slate-200 hover:text-black rounded-md text-xl"  onClick={colorChange}>Purple</button>
-        <button  className="border-2 border-black px-4 py-2 hover:bg-slate-200 hover:text-black rounded-md text-xl"  onClick={colorChange}>Pink</button>
-        <button  className="border-2 border-black px-4 py-2 hover:bg-slate-200 hover:text-black rounded-md text-xl"  onClick={colorChange}>Brown</button> */}
-
-       { colorName.map((color, index)=>{
-           return <button key = {index} className={`border-2 border-black px-4 py-2   hover:bg-slate-200 hover:text-black rounded-md text-xl  `}  onClick={colorChange}>{color} </button>
-        })}
-
-
-      </div>
-    </>
-  )
+    <div className="flex flex-col justify-center ">
+      <button
+        className="border-2 bg-blue-200 border-blue-100"
+        onClick={randomValue}
+      >
+        Change Heading
+      </button>
+      {/* <HeaderWithButton /> */}
+      <Header title={heading} />
+      <Header title="Bye World" />
+      <Header title="Bye World" />
+      <Header title="Bye World" />
+    </div>
+  );
 }
+
+// function HeaderWithButton() {
+//   const [heading, setHeading] = useState(123);
+//   const randomValue = () => {
+//     setHeading(Math.floor(Math.random() * 100));
+//   };
+//   return (
+//     <div>
+//       <Header title={heading}></Header>
+//       <button onClick={randomValue}>Click me</button>
+//     </div>
+//   );
+// }
+
+const Header = React.memo(function Header({ title }) {
+  return <div>Hey this is {title}</div>;
+});
